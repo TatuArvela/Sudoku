@@ -1,2 +1,2 @@
 # sudoku-solver-js
-Sudoku solver app built on JavaScript and Kudoku.js
+A sudoku solver app built with JavaScript and Kudoku.js
