@@ -64,53 +64,53 @@ function registerInputHandlers() {
     
     // Arrow controls
     cells[i].addEventListener('keydown', function(event) {
-      var active = parseInt(document.activeElement.id.substring(1));
-      switch (event.keyCode) {
-        case 37: // left
-        var next = document.getElementById('i' + (active - 1))
-        if (next != null)
-        next.focus();
-        break;
-        case 38: // up
-        var next = document.getElementById('i' + (active - 9))
-        if (next != null)
-        next.focus();
-        break;
-        case 39: // right
-        var next = document.getElementById('i' + (active + 1))
-        if (next != null)
-        next.focus();
-        break;
-        case 40: // down
-        var next = document.getElementById('i' + (active + 9))
-        if (next != null)
-        next.focus();
-        break;
-      }
-    });
-    
-    // Number input
-    cells[i].addEventListener('keyup', function(event) {
       clearError();
+
+      var active = parseInt(document.activeElement.id.substring(1));
       var curr = event.target;
       var currId = parseInt(curr.id.substring(1))
       var prev = document.getElementById('i' + (currId - 1));
       var next = document.getElementById('i' + (currId + 1));
-      
-      if (event.keyCode == 8 || event.keyCode == 46) {
-        curr.value = " ";
-        if (prev != null) {
-          prev.focus();
-        }
-      }
-      else if (keycodeMap[event.keyCode] != null) {
-        curr.value = keycodeMap[event.keyCode];
-        if (next != null) {
+
+      switch (true) {
+        // Movement
+        case (event.keyCode === 37): // left
+          var next = document.getElementById('i' + (active - 1))
+          if (next != null)
           next.focus();
-        }
-      }
-      else if (arrowKeys.indexOf(event.keyCode) < 0) {
-        curr.value = " ";
+          break;
+        case (event.keyCode === 38): // up
+          var next = document.getElementById('i' + (active - 9))
+          if (next != null)
+          next.focus();
+          break;
+        case (event.keyCode === 39): // right
+          var next = document.getElementById('i' + (active + 1))
+          if (next != null)
+          next.focus();
+          break;
+        case (event.keyCode === 40): // down
+          var next = document.getElementById('i' + (active + 9))
+          if (next != null)
+          next.focus();
+          break;
+
+        // Blank
+        case (event.keyCode == 8 || event.keyCode == 46):
+          curr.value = " ";
+          if (prev != null) {
+            prev.focus();
+          }
+          break;
+
+        // Numbers
+        case (keycodeMap[event.keyCode] != null):
+          curr.value = keycodeMap[event.keyCode];
+          if (next != null) {
+            next.focus();
+          }
+          event.preventDefault();
+          break;
       }
     });
   }
