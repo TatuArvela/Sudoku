@@ -24,9 +24,10 @@ body {
   text-align: center;
   padding: 10px;
   margin: 10px auto;
-  width: 239px;
+  width: 240px;
   box-shadow: 2px 2px black;
   border: 1px solid black;
+  box-sizing: border-box;
 }
 
 input, button {
@@ -40,8 +41,8 @@ input, button {
 
 .grid {
   display: block;
-  width: calc(25px*9 + 2*1px);
-  margin: 4px;
+  width: 100%;
+  /*! margin: 4px; */
   background: #000000;
   border: 1px solid #000000;
 }
@@ -67,14 +68,14 @@ input, button {
 #solve {
   height: 30px;
   line-height: 30px;
-  width: 231px;
-  margin: 4px;
+  width: 100%;
+  margin: 4px 0px;
   padding: 0px;
   display: block;
   border-color: #000000;
   border-width: 2px;
   color: #000000;
-  transform: translate(-2px, -2px);
+  transform: translate(-1px, -1px);
   box-shadow: 2px 2px #000000;
   background-image: url("brain.png");
   background-repeat: no-repeat;
@@ -96,8 +97,8 @@ input, button {
 }
 
 .cell {
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
   margin: 0px;
   padding: 0px;
   font-weight: bold;
