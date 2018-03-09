@@ -3,14 +3,19 @@
 <!-- Tatu Arvela, 2018 -->
 <head>
   <title>ＳＵＤＯＫＵ</title>
-  <meta charset='UTF-8'> 
+  <meta charset="UTF-8"> 
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <div class="wrapper">
-    <div id='grid-input' class="grid"></div>
-    <button type='button' id="solve"/></button>
-    <div id='grid-output' class='grid'></div>
+    <div id="grid-input" class="grid"></div>
+    <button type="button" id="solve" disabled="true"/></button>
+    <div class="status">
+      <img id="fail" src="fail.png">
+      <img id="single" src="single.png">
+      <img id="multi" src="multi.png">
+    </div>
+    <div id="grid-output" class="grid"></div>
   </div>
   <script language="javascript" src="kudoku.js"></script>
   <script src="index.js"></script>

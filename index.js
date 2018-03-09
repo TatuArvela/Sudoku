@@ -59,11 +59,11 @@ function generateOutputGrid() {
 }
 
 function registerInputHandlers() {
-  var cells = document.getElementsByClassName('cell-input');
-  for (var i = 0; i < cells.length; i++) {
+  var inputCells = document.getElementsByClassName('cell-input');
+  for (var i = 0; i < inputCells.length; i++) {
     
     // Arrow controls
-    cells[i].addEventListener('keydown', function(event) {
+    inputCells[i].addEventListener('keydown', function(event) {
       clearError();
 
       var active = parseInt(document.activeElement.id.substring(1));
@@ -98,6 +98,8 @@ function registerInputHandlers() {
         // Blank
         case (event.keyCode == 8 || event.keyCode == 46):
           curr.value = " ";
+          setNumberImage(curr, keycodeMap[event.keyCode]);
+          checkInputValues();
           if (prev != null) {
             prev.focus();
           }
@@ -106,6 +108,8 @@ function registerInputHandlers() {
         // Numbers
         case (keycodeMap[event.keyCode] != null):
           curr.value = keycodeMap[event.keyCode];
+          setNumberImage(curr, keycodeMap[event.keyCode]);
+          checkInputValues();
           if (next != null) {
             next.focus();
           }
@@ -114,6 +118,18 @@ function registerInputHandlers() {
       }
     });
   }
+}
+
+// The solver algorithm needs 15 hints for accurate results
+function checkInputValues() {
+  var inputCells = document.getElementsByClassName('cell-input');
+  var hints = 0;
+  for (i = 1; i <= 81; i++) {
+    var value = parseInt(inputCells[i-1].value);
+    if (value > 0)
+      hints++;
+  }
+  document.getElementById("solve").disabled = (hints < 15);
 }
 
 function getInputValues() {
@@ -130,7 +146,9 @@ function setValues(values, target) {
   var outputValues = values.split("");
   for (i = 1; i <= 81; i++) {
     var value = parseInt(outputValues[i-1]) || " ";
-    document.getElementById(target + i).value = value;
+    var element = document.getElementById(target + i);
+    element.value = value;
+    setNumberImage(element, value);
   }
 }
 
@@ -144,6 +162,10 @@ function solveAction() {
 }
 document.getElementById("solve").onclick = solveAction;
 
+function setNumberImage(element, value) {
+  element.style.backgroundImage = "url('" + value + ".png')";
+}
+
 function showError() {
   var inputGrid = document.getElementById("grid-input");
   inputGrid.classList.add("error");
@@ -154,19 +176,26 @@ function clearError() {
   inputGrid.classList.remove("error");
 }
 
-
 // Solution magic with Kudoku.js
 var solver = sudoku_solver();
 function solve() {
+  document.getElementById("fail").style.opacity = 0;
+  document.getElementById("single").style.opacity = 0;
+  document.getElementById("multi").style.opacity = 0;
   var solution = solver(getInputValues());
   if (solution.length == 0) {
+    document.getElementById("fail").style.opacity = 1;
     console.log("No solutions")
     return false;
   }
-  if (solution.length == 1)
+  if (solution.length == 1) {
+    document.getElementById("single").style.opacity = 1;
     console.log("Unique solution")
-  if (solution.length > 1)
+  }
+  if (solution.length > 1) {
+    document.getElementById("multi").style.opacity = 1;
     console.log("Multiple solutions")
+  }
   var parsedSolution = solution[0].join('');
   return parsedSolution;
 }
