@@ -81,6 +81,10 @@ input, button {
   border-right-width: 1px;
 }
 
+.cell:focus {
+  background: #b9b9b9;
+}
+
 
 
 #solve {
@@ -97,7 +101,22 @@ input, button {
   box-shadow: 2px 2px #000000;
   background-image: url("brain.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 50% 50%;
+  transition: 0.2s;
+}
+
+#solve:focus {
+  box-shadow: 2px 2px #000000, inset 4px 4px #b9b9b9, inset -4px -4px #b9b9b9;
+  animation-name: bounce;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+  0%   {background-position: 50% 50%;}
+  50%  {background-position: 50% 70%;}
+  100% {background-position: 50% 50%;}
 }
 
 #solve:active {
@@ -128,10 +147,6 @@ input, button {
 }
 
 
-
-*:focus {
-  background: #b9b9b9;
-}
 
 ::selection {
   background: transparent;

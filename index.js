@@ -22,6 +22,7 @@ var keycodeMap = {
   68:   4,  69:   5,  70:   6,
   71:   7,  72:   8,  73:   9
 }
+var gridIdToReturnTo = "i81";
 
 function generateInputGrid() {
   for (i = 1; i <= 9; i++) {
@@ -77,22 +78,27 @@ function registerInputHandlers() {
         case (event.keyCode === 37): // left
           var next = document.getElementById('i' + (active - 1))
           if (next != null)
-          next.focus();
+            next.focus();
           break;
         case (event.keyCode === 38): // up
           var next = document.getElementById('i' + (active - 9))
           if (next != null)
-          next.focus();
+            next.focus();
           break;
         case (event.keyCode === 39): // right
           var next = document.getElementById('i' + (active + 1))
           if (next != null)
-          next.focus();
+            next.focus();
           break;
         case (event.keyCode === 40): // down
           var next = document.getElementById('i' + (active + 9))
-          if (next != null)
-          next.focus();
+          if (next != null) {
+            next.focus();
+          }
+          else {
+            gridIdToReturnTo = 'i' + active;
+            document.getElementById('solve').focus();
+          }
           break;
 
         // Blank
@@ -118,6 +124,12 @@ function registerInputHandlers() {
       }
     });
   }
+  
+  document.getElementById('solve').addEventListener('keydown', function(event) {
+    if(event.keyCode === 38) {
+      document.getElementById(gridIdToReturnTo).focus();
+    }
+  });
 }
 
 // The solver algorithm needs 15 hints for accurate results
@@ -129,7 +141,7 @@ function checkInputValues() {
     if (value > 0)
       hints++;
   }
-  document.getElementById("solve").disabled = (hints < 15);
+  document.getElementById('solve').disabled = (hints < 15);
 }
 
 function getInputValues() {
