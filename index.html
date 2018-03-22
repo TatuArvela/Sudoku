@@ -1,24 +1,36 @@
+<!-- 
+  ＳＵＤＯＫＵ
+  Tatu Arvela, 2018 
+-->
+
 <!DOCTYPE html>
 <html>
-<!-- Tatu Arvela, 2018 -->
+
 <head>
-  <title>ＳＵＤＯＫＵ</title>
-  <meta charset="UTF-8"> 
+  <title></title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <div class="wrapper">
-    <div id="grid-input" class="grid"></div>
-    <button type="button" id="solve" disabled="true"/></button>
-    <div class="status">
-      <img id="fail" src="fail.png">
-      <img id="single" src="single.png">
-      <img id="multi" src="multi.png">
+    <div id="grid" class="grid"></div>
+    <div id="brain"></div>
+    <div id="buttons">
+      <button id="hint" class="button" type="button">
+        <img class="icon" src="hint.png">
+      </button>
+      <button id="solve" class="button" type="button">
+        <img class="icon" src="solve.png">
+      </button>
+      <button id="clear" class="button" type="button">
+        <img class="icon" src="clear.png">
+      </button>
     </div>
-    <div id="grid-output" class="grid"></div>
   </div>
   <script language="javascript" src="kudoku.js"></script>
   <script src="index.js"></script>
 </body>
+
 </html>
