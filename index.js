@@ -80,11 +80,14 @@ function hint() {
   var cellValues = getCellValues()
   var firstEmpty = cellValues.indexOf('.');
   if (firstEmpty >= 0) {
-    var value = solver(cellValues)[0][firstEmpty];
-    var element = document.getElementById(firstEmpty + 1);
+    var solution = solver(cellValues);
+    if (solution.length > 0) {
+      var value = solution[0][firstEmpty];
+      var element = document.getElementById(firstEmpty + 1);
 
-    element.value = value;
-    setNumberImage(element, value);
+      element.value = value;
+      setNumberImage(element, value);
+    }
   }
 }
 
