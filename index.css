@@ -22,7 +22,9 @@ body {
   padding: 10px;
   margin: 10px auto;
   height: 334px;
+  min-height: 334px;
   width: 240px;
+  min-width: 240px;
   box-shadow: 2px 2px black;
   border: 2px solid black;
 }
