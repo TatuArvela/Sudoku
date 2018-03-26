@@ -109,14 +109,14 @@ body {
   position: absolute;
   bottom: 14px;
   left: 14px;
-  height: 80px;
-  width: 80px;
-  background-color: #ffffff;
+  height: 84px;
+  width: 84px;
+  background-color: white;
   background-image: url("brain.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  border: 2px solid #000000;
-  box-shadow: 4px 4px inset #b9b9b9, -2px -2px inset #b9b9b9;
+  border: 2px solid #686868;
+  box-shadow: 2px 2px inset #b9b9b9, -4px -4px inset #686868;
   box-sizing: border-box;
   animation-name: bounce;
   animation-duration: 8000ms;
@@ -142,7 +142,7 @@ body {
   bottom: 14px;
   right: 14px;
   height: 80px;
-  width: 144px;
+  width: 138px;
 }
 
 .button {
@@ -159,7 +159,7 @@ body {
   border-width: 2px;
   border-style: solid;
   color: #000000;
-  transform: translate(-3px, -3px);
+  transform: translate(-4px, -4px);
   box-shadow: 4px 4px #000000;
 }
 
@@ -190,7 +190,7 @@ body {
 }
 
 #solve {
-  left: 52px;
+  left: 49px;
   top: 0px;
 }
 
