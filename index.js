@@ -10,19 +10,13 @@ String.prototype.replaceAt = function (index, char) {
 };
 
 function generateInputGrid() {
-  for (var i = 1; i <= 9; i++) {
-    var newRow = document.createElement('div');
-    newRow.setAttribute('id', 'row-' + i);
-    newRow.setAttribute('class', 'row');
-    document.getElementById('grid').appendChild(newRow);
-    for (var j = 1; j <= 9; j++) {
-      var newCell = document.createElement('input');
-      newCell.setAttribute('id', ((i - 1) * 9) + j);
-      newCell.setAttribute('class', 'cell');
-      newCell.setAttribute('type', 'text');
-      newCell.setAttribute('maxlength', '1');
-      document.getElementById('row-' + i).appendChild(newCell);
-    }
+  for (var i = 1; i <= 81; i++) {
+    var newCell = document.createElement('input');
+    newCell.setAttribute('id', (i - 1));
+    newCell.setAttribute('class', 'cell');
+    newCell.setAttribute('type', 'text');
+    newCell.setAttribute('maxlength', '1');
+    document.getElementById('grid').appendChild(newCell);
   }
 }
 
