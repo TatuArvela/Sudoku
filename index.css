@@ -1,5 +1,5 @@
 /*
-  ＳＵＤＯＫＵ
+  Sudoku
   Tatu Arvela, 2018
 */
 
