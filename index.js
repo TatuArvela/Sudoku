@@ -12,7 +12,7 @@ String.prototype.replaceAt = function (index, char) {
 function generateInputGrid() {
   for (var i = 1; i <= 81; i++) {
     var newCell = document.createElement('input');
-    newCell.setAttribute('id', (i));
+    newCell.setAttribute('id', i);
     newCell.setAttribute('class', 'cell');
     newCell.setAttribute('type', 'text');
     newCell.setAttribute('maxlength', '1');
@@ -89,12 +89,12 @@ var solver = sudoku_solver(); // eslint-disable-line no-undef
 
 function hint() {
   var cellValues = getCellValues();
-  var firstEmpty = cellValues.indexOf('.');
-  if (firstEmpty >= 0) {
+  var hasEmpty = cellValues.indexOf('.');
+  if (hasEmpty >= 0) {
     var solution = solver(cellValues);
     if (solution.length > 0) {
-      var value = solution[0][firstEmpty];
-      var element = document.getElementById(firstEmpty + 1);
+      var value = solution[0][activeCell - 1];
+      var element = document.getElementById(activeCell);
 
       element.value = value;
       setNumberImage(element, value);
@@ -156,9 +156,9 @@ var keycodeMap = {
   73: 9
 };
 
-var cellToReturnTo = 81;
+var activeCell = 81;
 
-var buttonToReturnTo = 'hint';
+var activeButton = 'hint';
 
 function handleCellKeypress(event) {
   var active = parseInt(document.activeElement.id);
@@ -187,8 +187,8 @@ function handleCellKeypress(event) {
       if (next != null) {
         next.focus();
       } else {
-        cellToReturnTo = active;
-        document.getElementById(buttonToReturnTo).focus();
+        activeCell = active;
+        document.getElementById(activeButton).focus();
       }
       break;
 
@@ -231,7 +231,7 @@ function registerCellHandlers() {
   for (var i = 0; i < cells.length; i++) {
     cells[i].onkeydown = handleCellKeypress;
     cells[i].addEventListener('focusout', function (event) {
-      cellToReturnTo = event.target.id;
+      activeCell = event.target.id;
     });
   }
 }
@@ -254,7 +254,7 @@ function registerButtonHandlers() {
           break;
 
         case 38:
-          document.getElementById(cellToReturnTo).focus();
+          document.getElementById(activeCell).focus();
           break;
 
         case 39:
@@ -267,7 +267,7 @@ function registerButtonHandlers() {
     };
 
     buttons[i].addEventListener('focusout', function (event) {
-      buttonToReturnTo = event.target.id;
+      activeButton = event.target.id;
     });
   }
 }
