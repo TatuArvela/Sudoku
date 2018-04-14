@@ -12,7 +12,7 @@ String.prototype.replaceAt = function (index, char) {
 function generateInputGrid() {
   for (var i = 1; i <= 81; i++) {
     var newCell = document.createElement('input');
-    newCell.setAttribute('id', (i - 1));
+    newCell.setAttribute('id', (i));
     newCell.setAttribute('class', 'cell');
     newCell.setAttribute('type', 'text');
     newCell.setAttribute('maxlength', '1');
@@ -48,19 +48,41 @@ function setNumberImage(element, value) {
     element.style.backgroundImage = 'none';
 }
 
-function updateBrainAnimation() {
+function hintCount() {
   var cells = document.getElementsByClassName('cell');
   var hints = 0;
   for (var i = 1; i <= 81; i++) {
     var value = parseInt(cells[i - 1].value);
-    if (value > 0)
+    if (value > 0) {
       hints++;
+    }
   }
+  return hints;
+}
 
-  if (hints >= 15)
-    document.getElementById('brain').classList.add('active');
-  else
-    document.getElementById('brain').classList.remove('active');
+function updateBrainAnimation() {
+  var solution = solver(getCellValues());
+
+  document.getElementById('brain').classList.remove('will-solve');
+  document.getElementById('brain').classList.remove('no-solution');
+  document.getElementById('brain').classList.remove('single-solution');
+  document.getElementById('brain').classList.remove('multiple-solutions');
+
+  if (solution.length == 0) {
+    document.getElementById('brain').classList.add('no-solution');
+  }
+  else {
+    if ((hintCount() >= 15) && (hintCount() < 81)) {
+      document.getElementById('brain').classList.add('will-solve');
+    }
+
+    if (solution.length == 1) {
+      document.getElementById('brain').classList.add('single-solution');
+    }
+    else if (solution.length > 1) {
+      document.getElementById('brain').classList.add('multiple-solutions');
+    }
+  }
 }
 
 var solver = sudoku_solver(); // eslint-disable-line no-undef
@@ -78,20 +100,14 @@ function hint() {
       setNumberImage(element, value);
     }
   }
+  updateBrainAnimation();
 }
 
 function solve() {
   var solution = solver(getCellValues());
 
   if (solution.length == 0) {
-    // console.log('No solutions')
     return false;
-  }
-  if (solution.length == 1) {
-    // console.log('Unique solution')
-  }
-  if (solution.length > 1) {
-    // console.log('Multiple solutions')
   }
 
   var parsedSolution = solution[0].join('');
@@ -176,7 +192,7 @@ function handleCellKeypress(event) {
       }
       break;
 
-      // Backspace
+    // Backspace
     case (event.keyCode == 8 || event.keyCode == 46):
       curr.value = ' ';
       setNumberImage(curr, -1);
@@ -188,7 +204,7 @@ function handleCellKeypress(event) {
       event.preventDefault();
       break;
 
-      // Numbers
+    // Numbers
     case (keycodeMap[event.keyCode] != null):
       curr.value = keycodeMap[event.keyCode];
       setNumberImage(curr, keycodeMap[event.keyCode]);
@@ -259,3 +275,4 @@ function registerButtonHandlers() {
 generateInputGrid();
 registerCellHandlers();
 registerButtonHandlers();
+updateBrainAnimation();

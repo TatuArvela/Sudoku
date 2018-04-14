@@ -130,6 +130,7 @@ body {
 }
 
 .brain {
+  position: relative;
   display: inline-block;
   padding: 36px;
   background-image: url("brain.png");
@@ -143,8 +144,33 @@ body {
   animation-iteration-count: infinite;
 }
 
-.active {
+.indicator {
+  display: block;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  height: 16px;
+  width: 16px;
+}
+
+.will-solve {
   animation-duration: 2000ms;
+}
+
+.no-solution {
+  animation: none;
+}
+
+.no-solution > .indicator {
+  background-image: url("none.png");
+}
+
+.single-solution > .indicator {
+  background-image: url("single.png");
+}
+
+.multiple-solutions > .indicator {
+  background-image: url("multiple.png");
 }
 
 @keyframes bounce {
