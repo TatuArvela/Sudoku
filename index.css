@@ -10,6 +10,9 @@ body {
   flex-direction: column;
   justify-content: center;
   cursor: url("cursor.png"), auto !important;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 body * {
