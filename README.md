@@ -10,4 +10,9 @@
 
 ---
 
-This Sudoku app mimics the style of 1980s MacOS and HyperCard, and uses [Kudoku.js by AttractiveChaos](https://attractivechaos.github.io/plb/kudoku.html) for its solving functionality.
+## What is this really?
+
+* Sakura Sudoku is meant to be a honoring tribute to 1980s Apple MacOS and HyperCard applications. I created this mildly useful little application as a CSS, JS and pixel graphics learning practice.
+* Sudoku uses [Kudoku.js by AttractiveChaos](https://attractivechaos.github.io/plb/kudoku.html) for its solving functionality.
+* This is not an actual commercial software product. The made-up name Sakura does not refer to any real-life company.
+* Supported browsers are the latest and greatest versions of Chrome and Firefox.
