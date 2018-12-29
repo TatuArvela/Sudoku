@@ -10,7 +10,7 @@
 
 ---
 
-## What is this really?
+## Actual README
 
 * Sakura Sudoku is meant to be a honoring tribute to 1980s Apple MacOS and HyperCard applications. I created this mildly useful little application as a CSS, JS and pixel graphics learning practice.
 * Sudoku uses [Kudoku.js by AttractiveChaos](https://attractivechaos.github.io/plb/kudoku.html) for its solving functionality.
