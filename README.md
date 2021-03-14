@@ -6,7 +6,7 @@
 
 | ![Sudoku](./sudoku.png?raw=true "Sudoku") |
 | --- |
-| [𝙲𝚕𝚒𝚌𝚔 𝚑𝚎𝚛𝚎 𝚝𝚘 𝚜𝚝𝚊𝚛𝚝](http://tatuarvela.github.io/Sakura-Sudoku) |
+| [𝙲𝚕𝚒𝚌𝚔 𝚑𝚎𝚛𝚎 𝚝𝚘 𝚜𝚝𝚊𝚛𝚝](http://tatuarvela.github.io/Sudoku) |
 
 ---
 
