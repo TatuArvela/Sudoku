@@ -16,7 +16,7 @@ body {
 }
 
 body * {
-  cursor:inherit;
+  cursor: inherit;
 }
 
 * {
@@ -136,14 +136,14 @@ body * {
 
 .controls {
   margin: 0 15px 15px 15px;
-  display: inline-block;
+  display: flex;
   text-align: left;
 }
 
 .brain {
   position: relative;
   display: inline-block;
-  padding: 36px;
+  padding: 40px;
   background-image: url("brain.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -196,17 +196,25 @@ body * {
   }
 }
 
+.buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 168px;
+  overflow: hidden;
+  margin: -4px;
+  position: relative;
+  left: 4px;
+}
+
 .button {
   display: inline-block;
-  background: white;
   text-align: center;
-  padding: 36px 20px;
+  padding: 6px 35px;
   border-width: 2px;
   color: black;
   box-shadow: 2px 2px black;
-  margin-left: 8px;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+  margin: 4px;
+  background: white no-repeat 50% 50%;
 }
 
 .button:focus {
@@ -231,4 +239,8 @@ body * {
 
 .clear {
   background-image: url("clear.png");
+}
+
+.newPuzzle {
+  background-image: url("newPuzzle.png");
 }

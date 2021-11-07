@@ -3,16 +3,10 @@
   Tatu Arvela, 2018
 */
 
-String.prototype.replaceAt = function (index, char) {
-  var a = this.split('');
-  a[index] = char;
-  return a.join('');
-};
-
 function generateInputGrid() {
-  for (var i = 1; i <= 81; i++) {
-    var newCell = document.createElement('input');
-    newCell.setAttribute('id', i);
+  for (let i = 1; i <= 81; i++) {
+    const newCell = document.createElement('input');
+    newCell.setAttribute('id', i.toString(10));
     newCell.setAttribute('class', 'cell');
     newCell.setAttribute('type', 'text');
     newCell.setAttribute('maxlength', '1');
@@ -21,20 +15,20 @@ function generateInputGrid() {
 }
 
 function getCellValues() {
-  var input = '';
-  for (var i = 1; i <= 81; i++) {
-    var rawValue = document.getElementById(i).value;
-    var value = (parseInt(rawValue) > 0) ? rawValue : '.';
+  let input = '';
+  for (let i = 1; i <= 81; i++) {
+    const rawValue = document.getElementById(i.toString(10)).value;
+    const value = (parseInt(rawValue) > 0) ? rawValue : '.';
     input += value;
   }
   return input;
 }
 
 function setCellValues(values) {
-  var outputValues = values.split('');
-  for (var i = 1; i <= 81; i++) {
-    var value = parseInt(outputValues[i - 1]) || 0;
-    var element = document.getElementById(i);
+  const outputValues = values.split('');
+  for (let i = 1; i <= 81; i++) {
+    let value = parseInt(outputValues[i - 1]) || 0;
+    const element = document.getElementById(i.toString(10));
     element.value = value;
     setNumberImage(element, value);
   }
@@ -49,10 +43,10 @@ function setNumberImage(element, value) {
 }
 
 function hintCount() {
-  var cells = document.getElementsByClassName('cell');
-  var hints = 0;
-  for (var i = 1; i <= 81; i++) {
-    var value = parseInt(cells[i - 1].value);
+  const cells = document.getElementsByClassName('cell');
+  let hints = 0;
+  for (let i = 1; i <= 81; i++) {
+    const value = parseInt(cells[i - 1].value);
     if (value > 0) {
       hints++;
     }
@@ -61,14 +55,14 @@ function hintCount() {
 }
 
 function updateBrainAnimation() {
-  var solution = solver(getCellValues());
+  const solution = solver(getCellValues(), 10);
 
   document.getElementById('brain').classList.remove('will-solve');
   document.getElementById('brain').classList.remove('no-solution');
   document.getElementById('brain').classList.remove('single-solution');
   document.getElementById('brain').classList.remove('multiple-solutions');
 
-  if (solution.length == 0) {
+  if (solution.length === 0) {
     document.getElementById('brain').classList.add('no-solution');
   }
   else {
@@ -76,7 +70,7 @@ function updateBrainAnimation() {
       document.getElementById('brain').classList.add('will-solve');
     }
 
-    if (solution.length == 1) {
+    if (solution.length === 1) {
       document.getElementById('brain').classList.add('single-solution');
     }
     else if (solution.length > 1) {
@@ -85,16 +79,14 @@ function updateBrainAnimation() {
   }
 }
 
-var solver = sudoku_solver(); // eslint-disable-line no-undef
-
 function hint() {
-  var cellValues = getCellValues();
-  var hasEmpty = cellValues.indexOf('.');
+  const cellValues = getCellValues();
+  const hasEmpty = cellValues.indexOf('.');
   if (hasEmpty >= 0) {
-    var solution = solver(cellValues);
+    const solution = solver(cellValues, 1);
     if (solution.length > 0) {
-      var value = solution[0][activeCell - 1];
-      var element = document.getElementById(activeCell);
+      const value = solution[0][activeCell - 1];
+      const element = document.getElementById(activeCell);
 
       element.value = value;
       setNumberImage(element, value);
@@ -104,24 +96,26 @@ function hint() {
 }
 
 function solve() {
-  var solution = solver(getCellValues());
+  const solution = solver(getCellValues(), 1);
 
-  if (solution.length == 0) {
+  if (solution.length === 0) {
     return false;
   }
 
-  var parsedSolution = solution[0].join('');
+  const parsedSolution = solution[0].join('');
   setCellValues(parsedSolution);
 }
 
 function clear() {
-  var empty = '';
-  for (var i = 0; i < 81; i++)
-    empty += '.';
-  setCellValues(empty);
+  setCellValues('.'.repeat(81));
 }
 
-var keycodeMap = {
+function newPuzzle() {
+  const newPuzzle = generateNewPuzzle();
+  setCellValues(newPuzzle);
+}
+
+const keycodeMap = {
   // Empty
   32: ' ',
   // Number keys
@@ -156,34 +150,33 @@ var keycodeMap = {
   73: 9
 };
 
-var activeCell = 81;
-
-var activeButton = 'hint';
+let activeCell = 81;
+let activeButton = 'hint';
 
 function handleCellKeypress(event) {
-  var active = parseInt(document.activeElement.id);
-  var curr = event.target;
-  var next;
+  const active = parseInt(document.activeElement.id);
+  const curr = event.target;
+  let next;
 
   switch (true) {
     // Arrow keys
     case (event.keyCode === 37): // left
-      next = document.getElementById(active - 1);
+      next = document.getElementById((active - 1).toString(10));
       if (next != null)
         next.focus();
       break;
     case (event.keyCode === 38): // up
-      next = document.getElementById(active - 9);
+      next = document.getElementById((active - 9).toString(10));
       if (next != null)
         next.focus();
       break;
     case (event.keyCode === 39): // right
-      next = document.getElementById(active + 1);
+      next = document.getElementById((active + 1).toString(10));
       if (next != null)
         next.focus();
       break;
     case (event.keyCode === 40): // down
-      next = document.getElementById(active + 9);
+      next = document.getElementById((active + 9).toString(10));
       if (next != null) {
         next.focus();
       } else {
@@ -193,11 +186,11 @@ function handleCellKeypress(event) {
       break;
 
     // Backspace
-    case (event.keyCode == 8 || event.keyCode == 46):
+    case (event.keyCode === 8 || event.keyCode === 46):
       curr.value = ' ';
       setNumberImage(curr, -1);
       updateBrainAnimation();
-      next = document.getElementById(active - 1);
+      next = document.getElementById((active - 1).toString(10));
       if (next != null) {
         next.focus();
       }
@@ -209,14 +202,14 @@ function handleCellKeypress(event) {
       curr.value = keycodeMap[event.keyCode];
       setNumberImage(curr, keycodeMap[event.keyCode]);
       updateBrainAnimation();
-      next = document.getElementById(active + 1);
+      next = document.getElementById((active + 1).toString(10));
       if (next != null) {
         next.focus();
       }
       event.preventDefault();
       break;
 
-    case (event.keyCode == 27 || event.keyCode == 9 || event.keyCode == 16):
+    case (event.keyCode === 27 || event.keyCode === 9 || event.keyCode === 16):
       break;
 
     default:
@@ -227,8 +220,8 @@ function handleCellKeypress(event) {
 }
 
 function registerCellHandlers() {
-  var cells = document.getElementsByClassName('cell');
-  for (var i = 0; i < cells.length; i++) {
+  const cells = document.getElementsByClassName('cell');
+  for (let i = 0; i < cells.length; i++) {
     cells[i].onkeydown = handleCellKeypress;
     cells[i].addEventListener('focusout', function (event) {
       activeCell = event.target.id;
@@ -240,11 +233,12 @@ function registerButtonHandlers() {
   document.getElementById('hint').onclick = hint;
   document.getElementById('solve').onclick = solve;
   document.getElementById('clear').onclick = clear;
+  document.getElementById('newPuzzle').onclick = newPuzzle;
 
-  var buttons = document.getElementsByClassName('button');
-  for (var i = 0; i < buttons.length; i++) {
+  const buttons = document.getElementsByClassName('button');
+  for (let i = 0; i < buttons.length; i++) {
     buttons[i].onkeydown = function (event) {
-      var active = document.activeElement.id;
+      const active = document.activeElement.id;
       switch (event.keyCode) {
         case 37:
           if (active === 'solve')

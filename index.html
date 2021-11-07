@@ -1,10 +1,10 @@
-<!-- 
+<!--
   Sudoku
-  Tatu Arvela, 2018 
+  Tatu Arvela, 2018
 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <title>Sudoku</title>
@@ -22,12 +22,17 @@
       <div class="brain" id="brain">
         <i class="indicator"></i>
       </div>
-      <button class="button hint" id="hint" type="button"></button>
-      <button class="button solve" id="solve" type="button"></button>
-      <button class="button clear" id="clear" type="button"></button>
+      <div class="buttons">
+        <button class="button hint" id="hint" type="button"></button>
+        <button class="button solve" id="solve" type="button"></button>
+        <button class="button clear" id="clear" type="button"></button>
+        <button class="button newPuzzle" id="newPuzzle" type="button"></button>
+      </div>
     </div>
   </div>
-  <script language="javascript" src="kudoku.js"></script>
+  <script src="kudoku.js"></script>
+  <script src="common.js"></script>
+  <script src="newPuzzle.js"></script>
   <script src="index.js"></script>
 </body>
 
